@@ -2,8 +2,6 @@ import signal, sys, threading
 from scapy.all import *
 from time import sleep
 
-# 10.67.101.22 48:0f:0c:48:82:75 10.67.101.254
-# 
 # 
 def poison():	
 	ip_to_infect = sys.argv[1]
